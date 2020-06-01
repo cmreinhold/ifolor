@@ -1,0 +1,63 @@
+ext {
+    // Config
+    appMinSdkVersion = 21
+
+    appCompileSdkVersion = 29
+    appTargetSdkVersion = 29
+
+    appVersionCode = 1
+    appVersionName = '1.0'
+
+    buildToolsVersion = '29.0.3'
+
+    // Plugins
+    gradleVersion = '4.0.0'
+    kotlinVersion = '1.3.72'
+
+    // Material
+    materialVersion = '1.1.0'
+
+    // Android libs
+    archVersion = '2.1.0'
+    appCompatVersion = '1.1.0'
+    coreVersion = '1.3.0'
+    constraintLayoutVersion = '2.0.0'
+    lifecycleVersion = '2.2.0'
+    livedataVersion = '2.2.0-rc02'
+    truthVersion = '1.0'
+    pagingVersion = '2.1.2'
+    workVersion = '2.2.0'
+
+    // Koin
+    koinVersion = '2.0.1'
+
+    // Room
+    roomVersion = '2.2.5'
+
+    // Coroutines
+    androidxTestVersion = '1.2.0'
+    appcompatVersion = '1.1.0'
+    constraintLayoutVersion = '1.1.3'
+    coroutinesVersion = '1.3.2'
+
+    // Networking
+    gsonVersion = '2.8.6'
+    picassoVersion = '2.5.2'
+    retrofitGsonVersion = '2.6.2'
+    retrofitVersion = '2.6.2'
+
+    threetenVersion = '1.2.4'
+
+    // Testing
+    jUnitVersion = '4.13'
+    assertJVersion = '3.15.0'
+    mockitoVersion = '3.3.3'
+    mockitoKotlinVersion = '2.2.0'
+
+    // Android Testing
+    espressoVersion = '3.2.0'
+    rulesVersion = '1.2.0'
+    runnerVersion = '1.2.0'
+    uiAutomatorVersion = '2.2.0'
+    testExtVersion = '1.1.1'
+}
