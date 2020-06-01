@@ -1,8 +1,10 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
 
         <item name="fontFamily">@font/hind_medium</item>
         <item name="android:includeFontPadding">false</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
