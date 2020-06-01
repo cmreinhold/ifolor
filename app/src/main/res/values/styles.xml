@@ -10,9 +10,44 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="errorIconDrawable">@drawable/ic_error_outline_24</item>
         <item name="errorTextColor">@color/error</item>
         <item name="hintTextColor">@color/hint</item>
+        <item name="textInputStyle">@style/AppTextInputLayout</item>
 
+    </style>
+
+    <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusBottomStart">0dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/two_grid_units</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/two_grid_units</item>
+        <item name="boxCornerRadiusBottomEnd">0dp</item>
+        <item name="boxBackgroundColor">@color/orange_10</item>
+        <item name="boxCollapsedPaddingTop">10dp</item>
+
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="counterTextAppearance">@style/HintText</item>
+
+        <item name="android:textColorHint">@color/hint</item>
+        <item name="errorIconDrawable">@drawable/ic_error_outline_24</item>
+        <item name="errorTextColor">@color/error</item>
+
+        <item name="colorControlNormal">@color/gray_80</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+        <item name="hintAnimationEnabled">true</item>
+        <item name="hintEnabled">true</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

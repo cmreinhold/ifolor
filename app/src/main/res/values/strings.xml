@@ -4,4 +4,8 @@
     <string name="registerAction">Register</string>
     <string name="registrationConfirmed">Thank you for registering</string>
 
+    <string name="prompt_name">Name</string>
+
+    <string name="invalid_name">Name must contain at least one character</string>
+
 </resources>
