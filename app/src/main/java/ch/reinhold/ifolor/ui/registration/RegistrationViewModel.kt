@@ -22,14 +22,17 @@ import kotlinx.coroutines.launch
  */
 class RegistrationViewModel(
     context: Context,
-    private val nameValidator: Validator<String>
+    private val nameValidator: Validator<String>,
+    private val emailValidator: Validator<String>
 ) : ViewModel() {
 
     val actions = MutableLiveData<ViewModelAction>()
 
     private val isValidName get() = nameValidator.isValid(name.get())
+    private val isValidEmail get() = emailValidator.isValid(email.get())
 
-    private val nameErrorMessage by lazy {  context.getString(R.string.invalid_name) }
+    private val nameErrorMessage by lazy { context.getString(R.string.invalid_name) }
+    private val emailErrorMessage by lazy { context.getString(R.string.invalid_email) }
 
     private fun emit(action: ViewModelAction) = actions.postValue(action)
 
@@ -48,6 +51,17 @@ class RegistrationViewModel(
 
     fun getOnNameFocus() = onFocusName
 
+    val email = ObservableField<String>()
+    val emailError = ObservableField<String>()
+    private val onFocusEmail = View.OnFocusChangeListener { _, focused ->
+        if (!focused) {
+            validateEmail()
+            validateButton()
+        }
+    }
+
+    fun getOnEmailFocus() = onFocusEmail
+
     val isButtonEnabled = ObservableBoolean()
     private val onRegisterButtonClick = View.OnClickListener {
         emitAsync(GoToConfirmationAction())
@@ -60,7 +74,12 @@ class RegistrationViewModel(
         else nameError.set(nameErrorMessage)
     }
 
+    private fun validateEmail() {
+        if (isValidEmail) emailError.set(null)
+        else emailError.set(emailErrorMessage)
+    }
+
     private fun validateButton() {
-        isButtonEnabled.set(isValidName)
+        isButtonEnabled.set(isValidName && isValidEmail)
     }
 }

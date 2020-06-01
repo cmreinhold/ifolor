@@ -55,6 +55,32 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_email"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/username"
+            app:layout_constraintVertical_bias="0.04"
+            app:startIconContentDescription="@string/prompt_name"
+            app:startIconDrawable="@drawable/ic_email_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="no"
+                android:inputType="textNoSuggestions|textEmailAddress"
+                android:selectAllOnFocus="true"
+                android:text="@={model.email}"
+                app:error="@{model.emailError}"
+                app:onFocus="@{model.getOnEmailFocus()}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/registerButton"
             android:layout_width="0dp"
@@ -62,12 +88,13 @@
             android:enabled="@{model.isButtonEnabled}"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:minHeight="@dimen/seven_grid_units"
             android:onClick="@{() -> model.getOnRegisterClick()}"
             android:text="@string/registerAction"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/username"
+            app:layout_constraintTop_toBottomOf="@id/email"
             app:layout_constraintVertical_bias="0.1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

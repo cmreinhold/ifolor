@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.core.logger.obtainLogger
 import ch.reinhold.ifolor.databinding.ActivityRegistrationBinding
+import ch.reinhold.ifolor.domain.validators.EmailFieldValidator
 import ch.reinhold.ifolor.domain.validators.RequiredFieldValidator
 import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
 import ch.reinhold.ifolor.ui.actions.ViewModelAction
@@ -18,7 +19,8 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
 
     private val viewModel = RegistrationViewModel(
         context = this,
-        nameValidator = RequiredFieldValidator()
+        nameValidator = RequiredFieldValidator(),
+        emailValidator = EmailFieldValidator()
     )
 
     private lateinit var binding: ActivityRegistrationBinding

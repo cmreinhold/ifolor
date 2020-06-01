@@ -5,7 +5,9 @@
     <string name="registrationConfirmed">Thank you for registering</string>
 
     <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
 
     <string name="invalid_name">Name must contain at least one character</string>
+    <string name="invalid_email">Email must be in the form of x@y.z</string>
 
 </resources>

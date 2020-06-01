@@ -26,10 +26,12 @@ class RegistrationViewModelTest {
     }
 
     private val nameValidator: Validator<String> = mock()
+    private val emailValidator: Validator<String> = mock()
 
     private val underTest = RegistrationViewModel(
         context,
-        nameValidator
+        nameValidator,
+        emailValidator
     )
 
     @Test

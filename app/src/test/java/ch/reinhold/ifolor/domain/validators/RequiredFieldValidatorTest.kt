@@ -1,8 +1,9 @@
 package ch.reinhold.ifolor.domain.validators
 
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
+@Suppress("UsePropertyAccessSyntax")
 class RequiredFieldValidatorTest {
 
     private val underTest = RequiredFieldValidator()
@@ -11,27 +12,27 @@ class RequiredFieldValidatorTest {
     fun validatesTrueGivenTextLengthIsGreaterThanMinimum() {
         val text = "123456"
         val result = underTest.isValid(text)
-        Assertions.assertThat(result).isTrue()
+        assertThat(result).isTrue()
     }
 
     @Test
     fun validatesTrueGivenTextLengthIsOne() {
         val text = "1"
         val result = underTest.isValid(text)
-        Assertions.assertThat(result).isTrue()
+        assertThat(result).isTrue()
     }
 
     @Test
     fun validatesFalseGivenTextLengthIsZero() {
         val text = ""
         val result = underTest.isValid(text)
-        Assertions.assertThat(result).isFalse()
+        assertThat(result).isFalse()
     }
 
     @Test
     fun validatesFalseGivenTextLengthIsNull() {
         val text = null
         val result = underTest.isValid(text)
-        Assertions.assertThat(result).isFalse()
+        assertThat(result).isFalse()
     }
 }
