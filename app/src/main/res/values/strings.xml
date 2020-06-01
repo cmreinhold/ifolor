@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ifolor</string>
+
+    <string name="registerAction">Register</string>
+    <string name="registrationConfirmed">Thank you for registering</string>
+
+</resources>
