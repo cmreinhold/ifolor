@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.domain.validators.Validator
 import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
+import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.ui.actions.ViewModelAction
 import kotlinx.coroutines.launch
 
@@ -23,16 +24,19 @@ import kotlinx.coroutines.launch
 class RegistrationViewModel(
     context: Context,
     private val nameValidator: Validator<String>,
-    private val emailValidator: Validator<String>
+    private val emailValidator: Validator<String>,
+    private val birthdayValidator: Validator<Long>
 ) : ViewModel() {
 
     val actions = MutableLiveData<ViewModelAction>()
 
     private val isValidName get() = nameValidator.isValid(name.get())
     private val isValidEmail get() = emailValidator.isValid(email.get())
+    private val isValidBirthday get() = birthdayValidator.isValid(date.get())
 
     private val nameErrorMessage by lazy { context.getString(R.string.invalid_name) }
     private val emailErrorMessage by lazy { context.getString(R.string.invalid_email) }
+    private val birthdayErrorMessage by lazy { context.getString(R.string.invalid_birthday) }
 
     private fun emit(action: ViewModelAction) = actions.postValue(action)
 
@@ -62,6 +66,21 @@ class RegistrationViewModel(
 
     fun getOnEmailFocus() = onFocusEmail
 
+    val formattedDate = ObservableField<String>()
+    val dateError = ObservableField<String>()
+    private val date = ObservableField<Long>()
+    val onClickDate = View.OnClickListener { _ ->
+        emit(ShowDatePickerAction(date.get()))
+    }
+
+    fun setBirthday(selectedDate: Long, selectedDateFormatted: String) {
+        date.set(selectedDate)
+        formattedDate.set(selectedDateFormatted)
+
+        validateBirthday()
+        validateButton()
+    }
+
     val isButtonEnabled = ObservableBoolean()
     private val onRegisterButtonClick = View.OnClickListener {
         emitAsync(GoToConfirmationAction())
@@ -79,7 +98,13 @@ class RegistrationViewModel(
         else emailError.set(emailErrorMessage)
     }
 
-    private fun validateButton() {
-        isButtonEnabled.set(isValidName && isValidEmail)
+    private fun validateBirthday() {
+        if (isValidBirthday) dateError.set(null)
+        else dateError.set(birthdayErrorMessage)
     }
+
+    private fun validateButton() {
+        isButtonEnabled.set(isValidName && isValidEmail && isValidBirthday)
+    }
+
 }

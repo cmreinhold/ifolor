@@ -78,6 +78,7 @@ dependencies {
 
     // Android Testing
     androidTestImplementation "androidx.arch.core:core-testing:$archVersion"
+    androidTestImplementation "androidx.test:core:$androidxTestVersion"
     androidTestImplementation "androidx.test.ext:junit:$testExtVersion"
     androidTestImplementation "androidx.test:rules:$rulesVersion"
     androidTestImplementation "androidx.test:runner:$runnerVersion"

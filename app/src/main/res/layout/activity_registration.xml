@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_name"
+            app:error="@{model.nameError}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toStartOf="@+id/guidelineStart"
@@ -50,7 +51,6 @@
                 android:inputType="textCapCharacters|textNoSuggestions"
                 android:selectAllOnFocus="true"
                 android:text="@={model.name}"
-                app:error="@{model.nameError}"
                 app:onFocus="@{model.getOnNameFocus()}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
+            app:error="@{model.emailError}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@+id/guidelineStart"
@@ -76,9 +77,38 @@
                 android:inputType="textNoSuggestions|textEmailAddress"
                 android:selectAllOnFocus="true"
                 android:text="@={model.email}"
-                app:error="@{model.emailError}"
                 app:onFocus="@{model.getOnEmailFocus()}" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/birthday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="afterDescendants"
+            android:hint="@string/prompt_birthday"
+            android:onClick="@{model.onClickDate}"
+            app:error="@{model.dateError}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            app:layout_constraintVertical_bias="0.04"
+            app:startIconContentDescription="@string/prompt_name"
+            app:startIconDrawable="@drawable/ic_calendar_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birthdayTextField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="no"
+                android:focusableInTouchMode="false"
+                android:imeActionLabel="@string/registerAction"
+                android:imeOptions="actionDone"
+                android:inputType="none"
+                android:onClick="@{model.onClickDate}"
+                android:selectAllOnFocus="true"
+                android:text="@={model.formattedDate}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -89,13 +119,13 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:minHeight="@dimen/seven_grid_units"
-            android:onClick="@{() -> model.getOnRegisterClick()}"
+            android:onClick="@{model.getOnRegisterClick()}"
             android:text="@string/registerAction"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
             app:layout_constraintStart_toEndOf="@+id/guidelineStart"
-            app:layout_constraintTop_toBottomOf="@id/email"
-            app:layout_constraintVertical_bias="0.1" />
+            app:layout_constraintTop_toBottomOf="@id/birthday"
+            app:layout_constraintVertical_bias="0.06" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
