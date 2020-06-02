@@ -4,4 +4,12 @@
     <string name="registerAction">Register</string>
     <string name="registrationConfirmed">Thank you for registering</string>
 
+    <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_birthday">Birthday</string>
+
+    <string name="invalid_name">It should contain at least one character</string>
+    <string name="invalid_email">It should be in the form of <b>x@y.z</b></string>
+    <string name="invalid_birthday">It should be a valid date between <b>Jan 1, 1900</b> and <b>December 31, 2019</b></string>
+
 </resources>
