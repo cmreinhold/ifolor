@@ -13,7 +13,10 @@
 
         <activity android:name=".uifeatures.confirmation.ConfirmationActivity" />
 
-        <activity android:name=".uifeatures.registration.RegistrationActivity">
+        <activity
+            android:name=".uifeatures.registration.RegistrationActivity"
+            android:theme="@style/AppTheme.Splashscreen"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

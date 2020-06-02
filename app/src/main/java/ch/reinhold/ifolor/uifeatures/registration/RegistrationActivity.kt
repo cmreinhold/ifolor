@@ -15,6 +15,7 @@ import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.uicore.actions.ViewModelAction
 import ch.reinhold.ifolor.uicore.extensions.datepicker.buildDatePicker
+import ch.reinhold.ifolor.uifeatures.confirmation.ConfirmationActivity
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -29,15 +30,17 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
     private val maxDate = LocalDate.of(2019, 12, 31)
         .atStartOfDay(ZoneOffset.UTC)
 
-    private val viewModel = RegistrationViewModel(
-        context = this,
-        ioDispatcher = Dispatchers.IO,
-        uiDispatcher = Dispatchers.Main,
-        ifolorDao = get(),
-        nameValidator = RequiredFieldValidator(),
-        emailValidator = EmailFieldValidator(),
-        birthdayValidator = DateRangeValidator(minDate, maxDate)
-    )
+    private val viewModel by lazy {
+        RegistrationViewModel(
+            context = this,
+            ioDispatcher = Dispatchers.IO,
+            uiDispatcher = Dispatchers.Main,
+            ifolorDao = get(),
+            nameValidator = RequiredFieldValidator(),
+            emailValidator = EmailFieldValidator(),
+            birthdayValidator = DateRangeValidator(minDate, maxDate)
+        )
+    }
 
     private lateinit var binding: ActivityRegistrationBinding
 
@@ -53,7 +56,7 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
 
     private fun handleActions(action: ViewModelAction) {
         when (action) {
-            is GoToConfirmationAction -> goToConfirmationScreen()
+            is GoToConfirmationAction -> goToConfirmationScreen(action.email)
             is ShowDatePickerAction -> showDatePicker(action.initialDate)
         }
     }
@@ -73,8 +76,8 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
         datePicker.show(supportFragmentManager, toString())
     }
 
-    private fun goToConfirmationScreen() {
-        // TODO: Implement navigation action to confirmation screen.
-        Toast.makeText(this, R.string.registrationConfirmed, Toast.LENGTH_SHORT).show()
+    private fun goToConfirmationScreen(email: String) {
+        val intent = ConfirmationActivity.makeIntent(this, email)
+        startActivity(intent)
     }
 }

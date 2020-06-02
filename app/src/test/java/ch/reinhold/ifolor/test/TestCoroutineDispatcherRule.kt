@@ -11,7 +11,7 @@ import org.junit.runner.Description
 @ExperimentalCoroutinesApi
 class TestCoroutineDispatcherRule : InstantTaskExecutorRule() {
 
-    private val testDispatcher = TestCoroutineDispatcher()
+    val testDispatcher = TestCoroutineDispatcher()
 
     override fun starting(description: Description?) {
         super.starting(description)

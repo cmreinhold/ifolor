@@ -17,6 +17,10 @@
 
     </style>
 
+    <style name="AppTheme.Splashscreen">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="AppTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxCornerRadiusBottomStart">0dp</item>
         <item name="boxCornerRadiusTopStart">@dimen/two_grid_units</item>

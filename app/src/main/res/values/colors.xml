@@ -3,11 +3,13 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_90">#88FFFFFF</color>
     <color name="gray_10">#BCC3C9</color>
     <color name="gray_20">#B4B4B4</color>
     <color name="gray_60">#AAAAAA</color>
     <color name="gray_80">#646464</color>
 
+    <color name="orange_05">#11FFA51E</color>
     <color name="orange_10">#22FFA51E</color>
     <color name="orange_80">#AAFFA51E</color>
     <color name="orange">#FFA51E</color>

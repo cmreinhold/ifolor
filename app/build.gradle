@@ -83,6 +83,7 @@ dependencies {
     // Testing
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
+    testImplementation "androidx.arch.core:core-testing:$archVersion"
 
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"

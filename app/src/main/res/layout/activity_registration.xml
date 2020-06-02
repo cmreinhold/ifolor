@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".uifeatures.registration.RegistrationActivity">
 
         <androidx.constraintlayout.widget.Guideline
@@ -118,7 +119,7 @@
             android:enabled="@{model.isButtonEnabled}"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:minHeight="@dimen/seven_grid_units"
+            android:minHeight="@dimen/eight_grid_units"
             android:onClick="@{model.getOnRegisterClick()}"
             android:text="@string/registerAction"
             app:layout_constraintBottom_toBottomOf="parent"
