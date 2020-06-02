@@ -20,7 +20,7 @@ class TestRoomDatabaseRule<DB : RoomDatabase>(private val clazz: KClass<DB>) :
 
     lateinit var database: DB
 
-    val testDispatcher = TestCoroutineDispatcher()
+    private val testDispatcher = TestCoroutineDispatcher()
     val testScope = TestCoroutineScope(testDispatcher)
 
     override fun starting(description: Description?) {

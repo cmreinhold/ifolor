@@ -1,4 +1,4 @@
-package ch.reinhold.ifolor.ui.registration
+package ch.reinhold.ifolor.uifeatures.registration
 
 import android.os.Bundle
 import android.widget.Toast
@@ -11,10 +11,10 @@ import ch.reinhold.ifolor.databinding.ActivityRegistrationBinding
 import ch.reinhold.ifolor.domain.validators.DateRangeValidator
 import ch.reinhold.ifolor.domain.validators.EmailFieldValidator
 import ch.reinhold.ifolor.domain.validators.RequiredFieldValidator
-import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
-import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
-import ch.reinhold.ifolor.ui.actions.ViewModelAction
-import ch.reinhold.ifolor.ui.extensions.datepicker.buildDatePicker
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
+import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
+import ch.reinhold.ifolor.uicore.actions.ViewModelAction
+import ch.reinhold.ifolor.uicore.extensions.datepicker.buildDatePicker
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.KoinComponent
 import org.koin.core.get

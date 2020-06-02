@@ -1,4 +1,4 @@
-package ch.reinhold.ifolor.ui.binding
+package ch.reinhold.ifolor.uicore.binding
 
 import android.view.View
 import android.widget.EditText

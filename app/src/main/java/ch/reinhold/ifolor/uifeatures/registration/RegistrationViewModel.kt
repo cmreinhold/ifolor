@@ -1,4 +1,4 @@
-package ch.reinhold.ifolor.ui.registration
+package ch.reinhold.ifolor.uifeatures.registration
 
 import android.content.Context
 import android.view.View
@@ -11,9 +11,9 @@ import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.data.db.IfolorDao
 import ch.reinhold.ifolor.data.db.entities.UserEntity
 import ch.reinhold.ifolor.domain.validators.Validator
-import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
-import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
-import ch.reinhold.ifolor.ui.actions.ViewModelAction
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
+import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
+import ch.reinhold.ifolor.uicore.actions.ViewModelAction
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

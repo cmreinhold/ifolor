@@ -1,4 +1,4 @@
-package ch.reinhold.ifolor.ui.registration
+package ch.reinhold.ifolor.uifeatures.registration
 
 import android.util.Log
 import androidx.test.espresso.Espresso.onView

@@ -1,12 +1,12 @@
-package ch.reinhold.ifolor.ui.registration
+package ch.reinhold.ifolor.uifeatures.registration
 
 import android.content.Context
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.data.db.IfolorDao
 import ch.reinhold.ifolor.domain.validators.Validator
 import ch.reinhold.ifolor.test.TestCoroutineDispatcherRule
-import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
-import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
+import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock

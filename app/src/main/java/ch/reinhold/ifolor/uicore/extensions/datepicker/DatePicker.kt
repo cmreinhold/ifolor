@@ -1,4 +1,4 @@
-package ch.reinhold.ifolor.ui.extensions.datepicker
+package ch.reinhold.ifolor.uicore.extensions.datepicker
 
 import androidx.annotation.StringRes
 import com.google.android.material.datepicker.CalendarConstraints
