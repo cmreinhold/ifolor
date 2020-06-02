@@ -8,11 +8,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.reinhold.ifolor.R
+import ch.reinhold.ifolor.data.db.IfolorDao
+import ch.reinhold.ifolor.data.db.entities.UserEntity
 import ch.reinhold.ifolor.domain.validators.Validator
 import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
 import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.ui.actions.ViewModelAction
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * [ViewModel] that observes events from the ui via databinding on the layout and updates its
@@ -23,6 +27,9 @@ import kotlinx.coroutines.launch
  */
 class RegistrationViewModel(
     context: Context,
+    private val ioDispatcher: CoroutineDispatcher,
+    private val uiDispatcher: CoroutineDispatcher,
+    private val ifolorDao: IfolorDao,
     private val nameValidator: Validator<String>,
     private val emailValidator: Validator<String>,
     private val birthdayValidator: Validator<Long>
@@ -83,7 +90,7 @@ class RegistrationViewModel(
 
     val isButtonEnabled = ObservableBoolean()
     private val onRegisterButtonClick = View.OnClickListener {
-        emitAsync(GoToConfirmationAction())
+        handleRegistration()
     }
 
     fun getOnRegisterClick() = onRegisterButtonClick
@@ -107,4 +114,16 @@ class RegistrationViewModel(
         isButtonEnabled.set(isValidName && isValidEmail && isValidBirthday)
     }
 
+    private fun handleRegistration() = viewModelScope.launch(ioDispatcher) {
+        val user = UserEntity(
+            name = name.get()!!,
+            email = email.get()!!,
+            birthday = date.get()!!
+        )
+        ifolorDao.insertUser(user)
+
+        withContext(uiDispatcher) {
+            emit(GoToConfirmationAction())
+        }
+    }
 }

@@ -38,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -65,19 +68,35 @@ dependencies {
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-scope:$koinVersion"
 
+    // Room
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+
+    // Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
     implementation "com.jakewharton.threetenabp:threetenabp:$threetenVersion"
 
     // Testing
     testImplementation "junit:junit:$jUnitVersion"
-    testImplementation "androidx.arch.core:core-testing:$archVersion"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
 
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
-    // Android Testing
+    // Architecture Components testing libs
     androidTestImplementation "androidx.arch.core:core-testing:$archVersion"
+
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    androidTestImplementation "org.assertj:assertj-core:$assertJVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // Android Testing
     androidTestImplementation "androidx.test:core:$androidxTestVersion"
     androidTestImplementation "androidx.test.ext:junit:$testExtVersion"
     androidTestImplementation "androidx.test:rules:$rulesVersion"
@@ -88,8 +107,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
-
-    // Architecture Components testing libs
-    androidTestImplementation "androidx.arch.core:core-testing:$archVersion"
 
 }

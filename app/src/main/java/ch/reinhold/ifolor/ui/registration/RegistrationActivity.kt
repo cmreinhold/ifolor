@@ -1,12 +1,12 @@
 package ch.reinhold.ifolor.ui.registration
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.core.extensions.toFormattedCalendarTime
-import ch.reinhold.ifolor.core.logger.obtainLogger
 import ch.reinhold.ifolor.databinding.ActivityRegistrationBinding
 import ch.reinhold.ifolor.domain.validators.DateRangeValidator
 import ch.reinhold.ifolor.domain.validators.EmailFieldValidator
@@ -15,13 +15,13 @@ import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
 import ch.reinhold.ifolor.ui.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.ui.actions.ViewModelAction
 import ch.reinhold.ifolor.ui.extensions.datepicker.buildDatePicker
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.KoinComponent
+import org.koin.core.get
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneOffset
 
 class RegistrationActivity : AppCompatActivity(), KoinComponent {
-
-    private val logger = obtainLogger("RegistrationActivity")
 
     private val minDate = LocalDate.of(1900, 1, 1)
         .atStartOfDay(ZoneOffset.UTC)
@@ -31,6 +31,9 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
 
     private val viewModel = RegistrationViewModel(
         context = this,
+        ioDispatcher = Dispatchers.IO,
+        uiDispatcher = Dispatchers.Main,
+        ifolorDao = get(),
         nameValidator = RequiredFieldValidator(),
         emailValidator = EmailFieldValidator(),
         birthdayValidator = DateRangeValidator(minDate, maxDate)
@@ -72,6 +75,6 @@ class RegistrationActivity : AppCompatActivity(), KoinComponent {
 
     private fun goToConfirmationScreen() {
         // TODO: Implement navigation action to confirmation screen.
-        logger.debug("Register clicked. Going to confirmation screen")
+        Toast.makeText(this, R.string.registrationConfirmed, Toast.LENGTH_SHORT).show()
     }
 }

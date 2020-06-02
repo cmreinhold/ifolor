@@ -1,7 +1,7 @@
 package ch.reinhold.ifolor
 
 import android.app.Application
-import ch.reinhold.ifolor.core.di.provideSquadsModule
+import ch.reinhold.ifolor.core.di.provideIfolorModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -17,7 +17,7 @@ class IfolorApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@IfolorApplication)
-            modules(listOf(provideSquadsModule()))
+            modules(listOf(provideIfolorModule()))
         }
     }
 

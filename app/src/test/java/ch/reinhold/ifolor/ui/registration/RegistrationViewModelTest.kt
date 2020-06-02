@@ -2,6 +2,7 @@ package ch.reinhold.ifolor.ui.registration
 
 import android.content.Context
 import ch.reinhold.ifolor.R
+import ch.reinhold.ifolor.data.db.IfolorDao
 import ch.reinhold.ifolor.domain.validators.Validator
 import ch.reinhold.ifolor.test.TestCoroutineDispatcherRule
 import ch.reinhold.ifolor.ui.actions.GoToConfirmationAction
@@ -11,6 +12,7 @@ import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -35,9 +37,15 @@ class RegistrationViewModelTest {
     private val nameValidator: Validator<String> = mock()
     private val emailValidator: Validator<String> = mock()
     private val birthdayValidator: Validator<Long> = mock()
+    private val userDao: IfolorDao = mock()
+
+    private val testDispatcher = TestCoroutineDispatcher()
 
     private val underTest = RegistrationViewModel(
         context,
+        testDispatcher,
+        testDispatcher,
+        userDao,
         nameValidator,
         emailValidator,
         birthdayValidator
