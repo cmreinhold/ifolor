@@ -40,7 +40,7 @@ class IfolorDatabaseTest {
 
         rule.testScope.launch { underTest.insertUser(user) }
 
-        val testedStoredUser = underTest.getUser(user.email)
+        val testedStoredUser = underTest.getUser(user.email)!!
         with(testedStoredUser) {
             assertThat(email).isEqualTo(user.email)
             assertThat(name).isEqualTo(user.name)

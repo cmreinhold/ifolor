@@ -47,7 +47,7 @@ class RegistrationActivityTest {
     private val dateAfterRange = now.minusMonths(1)
 
     @Test
-    fun activityLaunches() {
+    fun launchesActivity() {
         activityRule.launchActivity(null)
     }
 

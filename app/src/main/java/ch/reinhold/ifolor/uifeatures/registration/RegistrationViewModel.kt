@@ -11,9 +11,9 @@ import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.data.db.IfolorDao
 import ch.reinhold.ifolor.data.db.entities.UserEntity
 import ch.reinhold.ifolor.domain.validators.Validator
-import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.uicore.actions.ViewModelAction
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -47,10 +47,6 @@ class RegistrationViewModel(
 
     private fun emit(action: ViewModelAction) = actions.postValue(action)
 
-    private fun emitAsync(action: ViewModelAction) = viewModelScope.launch {
-        emit(action)
-    }
-
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
     private val onFocusName = View.OnFocusChangeListener { _, focused ->
@@ -76,7 +72,7 @@ class RegistrationViewModel(
     val formattedDate = ObservableField<String>()
     val dateError = ObservableField<String>()
     private val date = ObservableField<Long>()
-    val onClickDate = View.OnClickListener { _ ->
+    val onClickDate = View.OnClickListener {
         emit(ShowDatePickerAction(date.get()))
     }
 
@@ -120,10 +116,11 @@ class RegistrationViewModel(
             email = email.get()!!,
             birthday = date.get()!!
         )
+
         ifolorDao.insertUser(user)
 
         withContext(uiDispatcher) {
-            emit(GoToConfirmationAction())
+            emit(GoToConfirmationAction(user.email))
         }
     }
 }

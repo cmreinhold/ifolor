@@ -13,7 +13,7 @@ import ch.reinhold.ifolor.data.db.entities.UserEntity
 @Dao
 interface IfolorDao {
     @Query("SELECT * FROM user_table WHERE email IS :email LIMIT 1")
-    fun getUser(email: String): UserEntity
+    fun getUser(email: String): UserEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(entity: UserEntity)

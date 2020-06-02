@@ -3,16 +3,13 @@ package ch.reinhold.ifolor.uifeatures.registration
 import android.content.Context
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.data.db.IfolorDao
+import ch.reinhold.ifolor.data.db.entities.UserEntity
 import ch.reinhold.ifolor.domain.validators.Validator
 import ch.reinhold.ifolor.test.TestCoroutineDispatcherRule
-import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.anyOrNull
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
+import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Rule
@@ -27,6 +24,8 @@ class RegistrationViewModelTest {
     @JvmField
     val rule = TestCoroutineDispatcherRule()
 
+    private val testDispatcher get() = rule.testDispatcher
+
     private val localDate = LocalDate.of(2001, 12, 30)
         .atStartOfDay(ZoneOffset.UTC)
 
@@ -37,15 +36,13 @@ class RegistrationViewModelTest {
     private val nameValidator: Validator<String> = mock()
     private val emailValidator: Validator<String> = mock()
     private val birthdayValidator: Validator<Long> = mock()
-    private val userDao: IfolorDao = mock()
-
-    private val testDispatcher = TestCoroutineDispatcher()
+    private val ifolorDao: IfolorDao = mock()
 
     private val underTest = RegistrationViewModel(
         context,
         testDispatcher,
         testDispatcher,
-        userDao,
+        ifolorDao,
         nameValidator,
         emailValidator,
         birthdayValidator
@@ -53,11 +50,17 @@ class RegistrationViewModelTest {
 
     @Test
     fun emitsGoToConfirmationActionGivenRegisterButtonClicked() = runBlockingTest {
+        val user = UserEntity("email", "name", 0L)
         underTest.actions.observeForever { }
-
+        underTest.name.set(user.name)
+        underTest.email.set(user.email)
+        underTest.setBirthday(user.birthday, "0L")
         underTest.getOnRegisterClick().onClick(mock())
 
-        assertThat(underTest.actions.value).isInstanceOf(GoToConfirmationAction::class.java)
+        verify(ifolorDao).insertUser(user)
+
+        val tested = (underTest.actions.value as GoToConfirmationAction).email
+        assertThat(tested).isEqualTo(user.email)
     }
 
     @Test

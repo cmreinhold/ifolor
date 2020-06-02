@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ConfirmationActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="model"
+            type="ch.reinhold.ifolor.uifeatures.confirmation.ConfirmationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange_10"
+        android:gravity="center">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <TextView
+            android:id="@+id/confirmation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hind_medium"
+            android:text="@string/registrationConfirmed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.18" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/two_grid_units"
+            app:cardCornerRadius="@dimen/half_grid_unit"
+            app:cardElevation="@dimen/half_grid_unit"
+            app:contentPadding="@dimen/two_grid_units"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toEndOf="@+id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation"
+            app:layout_constraintVertical_bias="0.17">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/seven_grid_units"
+                    android:layout_height="@dimen/seven_grid_units"
+                    android:contentDescription="@null"
+                    android:elevation="@dimen/half_grid_unit"
+                    android:src="@drawable/ic_account_circle_24"
+                    android:tint="@color/orange_80" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind_medium"
+                    android:padding="@dimen/one_grid_unit"
+                    android:text="@{model.name}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/gray_80"
+                    android:textSize="18sp"
+                    tools:text="Christian Reinhold" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind"
+                    android:letterSpacing="0.03"
+                    android:text="@{model.email}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="16sp"
+                    tools:text="christian.reinhold@gmail.com" />
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hind"
+                    android:padding="@dimen/one_grid_unit"
+                    android:text="@{model.birthday}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="15sp"
+                    tools:text="2nd May 1981" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

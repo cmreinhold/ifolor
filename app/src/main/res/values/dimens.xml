@@ -2,4 +2,6 @@
 <resources>
     <dimen name="two_grid_units">16dp</dimen>
     <dimen name="seven_grid_units">56dp</dimen>
+    <dimen name="half_grid_unit">4dp</dimen>
+    <dimen name="one_grid_unit">8dp</dimen>
 </resources>
