@@ -36,7 +36,7 @@ class ConfirmationActivity : AppCompatActivity(), KoinComponent {
 
     companion object {
 
-        private const val PARAM_EMAIL = "param.email"
+        const val PARAM_EMAIL = "param.email"
 
         fun makeIntent(context: Context, email: String) =
             Intent(context, ConfirmationActivity::class.java).apply {

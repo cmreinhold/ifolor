@@ -25,7 +25,46 @@ In other situations it will need to communicate with the data layer to persist t
 In both situations we are using coroutines (suspend fun and flows) + live data to emit to both places.
 
 
+## Testing
+#### + Unit tests
+There is a total of **33 unit tests** that test domain validation logic, models, utility extensions, viewmodels and databases.
+
+![Snapshot screen](snapshots/unit-tests.png)
+
+#### + Instrumentation tests
+There are three types of instrumentation tests: 
+
+- **Database tests:** For testing CRUD operations on Room Data Access Objects (DAO).
+- **Activity intents tests:** For testing navigation to and from screens via intents, checking that their content matches some expectations.
+- **UI component usecase tests:** Tests each possible usecase or states of the ui components for a given activity. 
+
+![Snapshot screen](snapshots/uitests.png)
+
+See some attached videos of these tests.
+
+##### a) Registration intent tests [RegistrationIntentActivityTest]
+
+![Snapshot screen](snapshots/registration-intent-tests.gif)
+
+##### b) Registration UI tests [RegistrationActivityTest]
+
+![Snapshot screen](snapshots/registration-tests.mov)
+
+##### c) Confirmation UI tests [ConfirmationActivityTest]
+![Snapshot screen](snapshots/confirmation-tests.gif) 
+
+
 ## Revisions
+
+#### + BUG-002 - Registration button first time not clickable
+
+- Fixed initial unclickable button
+- Added intent activity android test to ensure the intent gets called after registration button click
+- Moved shared calendarPicker testing methods to utils
+
+#### + BUG-001- Wrong validation on one char name field
+
+- Fixed error on validating name field with one char
 
 #### + PROD3-002 - Documentation
 - Added readme info and snapshots

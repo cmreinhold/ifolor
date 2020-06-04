@@ -72,7 +72,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
