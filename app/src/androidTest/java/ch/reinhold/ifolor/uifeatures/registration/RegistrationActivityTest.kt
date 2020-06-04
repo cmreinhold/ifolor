@@ -79,6 +79,22 @@ class RegistrationActivityTest {
     }
 
     @Test
+    fun validatesNameProperlyAfterEachCharacterNameChange() {
+        activityRule.launchActivity(null)
+
+        onView(withId(R.id.username)).check(matches(not(hasTextInputError(invalidName))))
+
+        onView(withId(R.id.usernameTextField)).perform(click(), replaceText("c"))
+        onView(withId(R.id.username)).check(matches(not(hasTextInputError(invalidName))))
+
+        onView(withId(R.id.usernameTextField)).perform(replaceText(""))
+        onView(withId(R.id.username)).check(matches(hasTextInputError(invalidName)))
+
+        onView(withId(R.id.usernameTextField)).perform(replaceText("Chris"))
+        onView(withId(R.id.username)).check(matches(not(hasTextInputError(invalidName))))
+    }
+
+    @Test
     fun validatesWithErrorAfterEmailFieldLosesFocus() {
         val dummyEmail = ""
         activityRule.launchActivity(null)

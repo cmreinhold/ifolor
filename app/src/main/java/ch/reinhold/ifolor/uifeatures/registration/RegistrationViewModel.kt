@@ -2,6 +2,7 @@ package ch.reinhold.ifolor.uifeatures.registration
 
 import android.content.Context
 import android.view.View
+import android.widget.TextView
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -49,7 +50,8 @@ class RegistrationViewModel(
 
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
-    private val onFocusName = View.OnFocusChangeListener { _, focused ->
+    private val onFocusName = View.OnFocusChangeListener { textView, focused ->
+        name.set((textView as TextView).text?.toString())
         if (!focused) {
             validateName()
             validateButton()
@@ -60,7 +62,8 @@ class RegistrationViewModel(
 
     val email = ObservableField<String>()
     val emailError = ObservableField<String>()
-    private val onFocusEmail = View.OnFocusChangeListener { _, focused ->
+    private val onFocusEmail = View.OnFocusChangeListener { textView, focused ->
+        email.set((textView as TextView).text?.toString())
         if (!focused) {
             validateEmail()
             validateButton()

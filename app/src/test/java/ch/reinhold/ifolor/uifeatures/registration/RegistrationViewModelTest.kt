@@ -1,6 +1,7 @@
 package ch.reinhold.ifolor.uifeatures.registration
 
 import android.content.Context
+import android.widget.TextView
 import ch.reinhold.ifolor.R
 import ch.reinhold.ifolor.data.db.IfolorDao
 import ch.reinhold.ifolor.data.db.entities.UserEntity
@@ -135,7 +136,7 @@ class RegistrationViewModelTest {
             .thenAnswer { !it.getArgument<String>(0).isNullOrBlank() }
 
         underTest.name.set(name)
-        underTest.getOnNameFocus().onFocusChange(mock(), false)
+        underTest.getOnNameFocus().onFocusChange(mockTextView(name), false)
 
         assertThat(underTest.actions.value).isNull()
         assertThat(underTest.name.get()).isEqualTo(name)
@@ -151,7 +152,7 @@ class RegistrationViewModelTest {
         whenever(emailValidator.isValid(anyOrNull())).thenReturn(false)
 
         underTest.email.set(email)
-        underTest.getOnEmailFocus().onFocusChange(mock(), false)
+        underTest.getOnEmailFocus().onFocusChange(mockTextView(email), false)
 
         assertThat(underTest.actions.value).isNull()
         assertThat(underTest.email.get()).isEqualTo(email)
@@ -168,7 +169,7 @@ class RegistrationViewModelTest {
             .thenAnswer { !it.getArgument<String>(0).isNullOrBlank() }
 
         underTest.name.set(name)
-        underTest.getOnNameFocus().onFocusChange(mock(), false)
+        underTest.getOnNameFocus().onFocusChange(mockTextView(name), false)
 
         assertThat(underTest.actions.value).isNull()
         assertThat(underTest.name.get()).isEqualTo(name)
@@ -180,11 +181,15 @@ class RegistrationViewModelTest {
     fun doesNothingGivenOnFocusChangeIsTrue() = runBlockingTest {
         underTest.actions.observeForever { }
 
-        underTest.getOnNameFocus().onFocusChange(mock(), true)
+        underTest.getOnNameFocus().onFocusChange(mockTextView(), true)
 
         assertThat(underTest.actions.value).isNull()
         assertThat(underTest.name.get()).isNull()
         assertThat(underTest.nameError.get()).isNull()
         assertThat(underTest.isButtonEnabled.get()).isEqualTo(false)
+    }
+
+    private fun mockTextView(text: String? = null) = mock<TextView> {
+        on(mock.text).thenReturn(text)
     }
 }
