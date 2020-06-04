@@ -1,7 +1,6 @@
 package ch.reinhold.ifolor.uifeatures.registration
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -11,9 +10,9 @@ import ch.reinhold.ifolor.databinding.ActivityRegistrationBinding
 import ch.reinhold.ifolor.domain.validators.DateRangeValidator
 import ch.reinhold.ifolor.domain.validators.EmailFieldValidator
 import ch.reinhold.ifolor.domain.validators.RequiredFieldValidator
-import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import ch.reinhold.ifolor.uicore.actions.ShowDatePickerAction
 import ch.reinhold.ifolor.uicore.actions.ViewModelAction
+import ch.reinhold.ifolor.uicore.actions.navigation.GoToConfirmationAction
 import ch.reinhold.ifolor.uicore.extensions.datepicker.buildDatePicker
 import ch.reinhold.ifolor.uifeatures.confirmation.ConfirmationActivity
 import kotlinx.coroutines.Dispatchers

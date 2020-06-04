@@ -15,7 +15,12 @@ object EditTextDataBindingAdapter {
     @BindingAdapter("onFocus")
     fun onFocusChanged(editText: EditText, focusChangeListener: View.OnFocusChangeListener?) {
         val times = AtomicInteger()
-        editText.onFocusChangeListener = focusChangeListener
+        editText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                editText.clearFocus()
+            }
+            focusChangeListener?.onFocusChange(view, hasFocus)
+        }
         editText.doOnTextChanged { text, _, _, count ->
             if (times.incrementAndGet() > 1 || text != null) {
                 logger.debug("OnTextChanged -> txt: $text, times: $times, count: $count")

@@ -46,7 +46,9 @@ class RegistrationViewModel(
     private val emailErrorMessage by lazy { context.getString(R.string.invalid_email) }
     private val birthdayErrorMessage by lazy { context.getString(R.string.invalid_birthday) }
 
-    private fun emit(action: ViewModelAction) = actions.postValue(action)
+    private fun emit(action: ViewModelAction) {
+        actions.value = action
+    }
 
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
@@ -113,17 +115,19 @@ class RegistrationViewModel(
         isButtonEnabled.set(isValidName && isValidEmail && isValidBirthday)
     }
 
-    private fun handleRegistration() = viewModelScope.launch(ioDispatcher) {
+    private fun handleRegistration() {
         val user = UserEntity(
             name = name.get()!!,
             email = email.get()!!,
             birthday = date.get()!!
         )
+        viewModelScope.launch(ioDispatcher) {
 
-        ifolorDao.insertUser(user)
+            ifolorDao.insertUser(user)
 
-        withContext(uiDispatcher) {
-            emit(GoToConfirmationAction(user.email))
+            withContext(uiDispatcher) {
+                emit(GoToConfirmationAction(user.email))
+            }
         }
     }
 }

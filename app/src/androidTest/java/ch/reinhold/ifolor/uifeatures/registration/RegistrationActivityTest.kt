@@ -1,6 +1,5 @@
 package ch.reinhold.ifolor.uifeatures.registration
 
-import android.util.Log
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -52,7 +51,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun initialStateShowsLabelsWithNoTextFilledAndButtonDisabled() {
+    fun showsInitialStateLabels_WithNoTextFilled_AndButtonDisabled() {
         activityRule.launchActivity(null)
 
         onView(withId(R.id.registerButton)).apply {
@@ -62,7 +61,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun validatesWithErrorAfterNameFieldLosesFocus() {
+    fun validatesWithError_AfterNameFieldLosesFocus() {
         val dummyName = ""
         activityRule.launchActivity(null)
 
@@ -79,7 +78,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun validatesNameProperlyAfterEachCharacterNameChange() {
+    fun validatesNameProperly_AfterEachCharacterNameChange() {
         activityRule.launchActivity(null)
 
         onView(withId(R.id.username)).check(matches(not(hasTextInputError(invalidName))))
@@ -95,7 +94,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun validatesWithErrorAfterEmailFieldLosesFocus() {
+    fun validatesWithError_AfterEmailFieldLosesFocus() {
         val dummyEmail = ""
         activityRule.launchActivity(null)
 
@@ -112,7 +111,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun validatesWithoutErrorAfterCalendarSetBefore2019() {
+    fun validatesWithoutError_AfterCalendarSetBefore2019() {
         activityRule.launchActivity(null)
 
         selectValidCalendarDate()
@@ -123,7 +122,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun validatesWithErrorAfterCalendarSetAfter2019() {
+    fun validatesWithError_AfterCalendarSetAfter2019() {
         activityRule.launchActivity(null)
 
         selectInvalidCalendarDate()
@@ -133,7 +132,7 @@ class RegistrationActivityTest {
         onView(withId(R.id.birthday)).check(matches(hasTextInputError(invalidBirthday)))
     }
 
-    fun validatesNothingWhenCancellingDatePicker() {
+    fun validatesNothing_WhenCancellingDatePicker() {
         activityRule.launchActivity(null)
 
         openCalendarPicker()
@@ -145,7 +144,7 @@ class RegistrationActivityTest {
     }
 
     @Test
-    fun registerButtonGetsEnabledGivenAllFieldsAreValid() {
+    fun enablesRegisterButtonGets_GivenAllFieldsValid() {
         val dummyName = "Christian Reinhold"
         val dummyEmail = "christian.reinhold@ifolor.com"
 
@@ -167,40 +166,27 @@ class RegistrationActivityTest {
         }
     }
 
-    private fun selectValidCalendarDate() {
-        openCalendarPicker()
-        navigateToCalendarMonth(dateWithinRange)
-        selectCalendarDay(dateWithinRange)
-    }
-
-    private fun selectInvalidCalendarDate() {
-        openCalendarPicker()
-        navigateToCalendarMonth(dateAfterRange)
-        selectCalendarDay(dateAfterRange)
-    }
-
-    private fun selectCalendarDay(dateTime: ZonedDateTime, dayOfMonth: Int = 1) {
-        val dateInMillis = dateTime.toInstant().toEpochMilli()
-        MaterialDatePickerTestUtils.clickDay(dateInMillis, dayOfMonth)
-        MaterialDatePickerTestUtils.clickOk()
-    }
-
-    private fun navigateToCalendarMonth(targetDateTime: ZonedDateTime) {
-        val monthsToYear = 12 * (now.year - targetDateTime.year)
-        val monthsInYear = now.monthValue - targetDateTime.monthValue
-        val monthsCount = monthsToYear + monthsInYear
-        Log.d("Click", "Clicking $monthsCount times on previous month")
-
-        repeat(monthsCount) {
-            MaterialDatePickerTestUtils.clickPrev()
-        }
+    private fun openCalendarPicker() {
+        MaterialDatePickerTestUtils.openCalendarPicker(withId(R.id.birthdayTextField))
     }
 
     private fun dismissCalendarPicker() {
         MaterialDatePickerTestUtils.clickCancel()
     }
 
-    private fun openCalendarPicker() {
-        onView(withId(R.id.birthdayTextField)).perform(click())
+    private fun selectValidCalendarDate() {
+        MaterialDatePickerTestUtils.selectCalendarDate(
+            withId(R.id.birthdayTextField),
+            now,
+            dateWithinRange
+        )
+    }
+
+    private fun selectInvalidCalendarDate() {
+        MaterialDatePickerTestUtils.selectCalendarDate(
+            withId(R.id.birthdayTextField),
+            now,
+            dateAfterRange
+        )
     }
 }
