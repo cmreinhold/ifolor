@@ -2,6 +2,7 @@ package ch.reinhold.ifolor.uifeatures.registration
 
 import android.content.Context
 import android.view.View
+import android.widget.TextView
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -45,11 +46,14 @@ class RegistrationViewModel(
     private val emailErrorMessage by lazy { context.getString(R.string.invalid_email) }
     private val birthdayErrorMessage by lazy { context.getString(R.string.invalid_birthday) }
 
-    private fun emit(action: ViewModelAction) = actions.postValue(action)
+    private fun emit(action: ViewModelAction) {
+        actions.value = action
+    }
 
     val name = ObservableField<String>()
     val nameError = ObservableField<String>()
-    private val onFocusName = View.OnFocusChangeListener { _, focused ->
+    private val onFocusName = View.OnFocusChangeListener { textView, focused ->
+        name.set((textView as TextView).text?.toString())
         if (!focused) {
             validateName()
             validateButton()
@@ -60,7 +64,8 @@ class RegistrationViewModel(
 
     val email = ObservableField<String>()
     val emailError = ObservableField<String>()
-    private val onFocusEmail = View.OnFocusChangeListener { _, focused ->
+    private val onFocusEmail = View.OnFocusChangeListener { textView, focused ->
+        email.set((textView as TextView).text?.toString())
         if (!focused) {
             validateEmail()
             validateButton()
@@ -110,17 +115,19 @@ class RegistrationViewModel(
         isButtonEnabled.set(isValidName && isValidEmail && isValidBirthday)
     }
 
-    private fun handleRegistration() = viewModelScope.launch(ioDispatcher) {
+    private fun handleRegistration() {
         val user = UserEntity(
             name = name.get()!!,
             email = email.get()!!,
             birthday = date.get()!!
         )
+        viewModelScope.launch(ioDispatcher) {
 
-        ifolorDao.insertUser(user)
+            ifolorDao.insertUser(user)
 
-        withContext(uiDispatcher) {
-            emit(GoToConfirmationAction(user.email))
+            withContext(uiDispatcher) {
+                emit(GoToConfirmationAction(user.email))
+            }
         }
     }
 }
