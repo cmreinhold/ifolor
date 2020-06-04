@@ -48,13 +48,17 @@ See some attached videos of these tests.
 
 ##### b) Registration UI tests [RegistrationActivityTest]
 
-![Snapshot screen](snapshots/registration-tests.mov)
+![Snapshot screen](snapshots/registration-tests.gif)
+
+*Converted from .mov file*
 
 ##### c) Confirmation UI tests [ConfirmationActivityTest]
 ![Snapshot screen](snapshots/confirmation-tests.gif) 
 
 
 ## Revisions
+
+![Snapshot screen](snapshots/branches.png) 
 
 #### + BUG-002 - Registration button first time not clickable
 
